@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "571565255832",
+    "firebase_url": "https://snapball-2cc48.firebaseio.com",
+    "project_id": "snapball-2cc48",
+    "storage_bucket": "snapball-2cc48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571565255832:android:c5dc1e8a5ce72757",
+        "android_client_info": {
+          "package_name": "com.example.android.snapball"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571565255832-a1qguhvk3jn8vqn6bhnqg27lvp3mf9gp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.snapball",
+            "certificate_hash": "f0a63b7fe244dfef0bb3889ffc4a7d0889da8d18"
+          }
+        },
+        {
+          "client_id": "571565255832-e4fkrppn5v4jke3lr3jq7cu7f2ofcqfn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD28FpvogP69QG8DmbP9itn6agLnGIDNXE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571565255832-e4fkrppn5v4jke3lr3jq7cu7f2ofcqfn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
