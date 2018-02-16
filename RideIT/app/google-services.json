@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "285871145577",
+    "firebase_url": "https://rideit-e2177.firebaseio.com",
+    "project_id": "rideit-e2177",
+    "storage_bucket": "rideit-e2177.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285871145577:android:be4aeb1a5ade4ba1",
+        "android_client_info": {
+          "package_name": "com.example.android.rideit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285871145577-qi9auk7eonjj12ab6apmdq9eufo1e2sb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.rideit",
+            "certificate_hash": "f0a63b7fe244dfef0bb3889ffc4a7d0889da8d18"
+          }
+        },
+        {
+          "client_id": "285871145577-nqhg0bg4tgmibglv8ocvqf2vs7mogn74.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk-eAJFkNeYdU14U6qdQn1RrM-RPtGNdo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285871145577-nqhg0bg4tgmibglv8ocvqf2vs7mogn74.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
