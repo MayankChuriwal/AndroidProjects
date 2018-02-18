@@ -1,7 +1,11 @@
 package com.example.android.snapball.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +24,8 @@ import com.example.android.snapball.LoginRegistration.SplashScreenActivity;
 import com.example.android.snapball.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -85,15 +91,52 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback{
         jpegCallback = new Camera.PictureCallback() {
             @Override
             public void onPictureTaken(byte[] bytes, Camera camera) {
-                Intent intent = new Intent(getActivity(), ShowCaptureActivity.class);
-                intent.putExtra("capture", bytes);
-                startActivity(intent);
-                return;
+
+                Bitmap decodeBitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                Bitmap rotateBitmap = rotate(decodeBitmap);
+
+                String fileLocation = SaveImageToStorage(rotateBitmap);
+                if(fileLocation != null) {
+                    Intent intent = new Intent(getActivity(), ShowCaptureActivity.class);
+                    startActivity(intent);
+                    return;
+                }
             }
         };
 
 
         return view;
+    }
+
+    public String SaveImageToStorage(Bitmap bitmap)
+    {
+        String fileName = "imageToSend";
+        try{
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100 , bytes);
+            FileOutputStream fileOutputStream = getContext().openFileOutput(fileName, Context.MODE_PRIVATE);
+            fileOutputStream.write(bytes.toByteArray());
+            fileOutputStream.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            fileName = null;
+        }
+
+        return fileName;
+    }
+
+
+    private Bitmap rotate(Bitmap decodeBitmap) {
+
+        int width = decodeBitmap.getWidth();
+        int height = decodeBitmap.getHeight();
+
+        Matrix matrix= new Matrix();
+        matrix.setRotate(90);
+        return Bitmap.createBitmap(decodeBitmap,0,0,width,height,matrix,true);
+
     }
 
     private void cameraImage() {

@@ -22,6 +22,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,28 +30,26 @@ public class ShowCaptureActivity extends AppCompatActivity {
 
 
     String Uid = FirebaseAuth.getInstance().getUid();
-    Bitmap rotateBitmap;
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_capture);
 
-        Bundle extras = getIntent().getExtras();
-        assert extras != null;
-        byte[] b = extras.getByteArray("capture");
 
-        if(b!=null) {
-            ImageView imageView = findViewById(R.id.imageCaptured);
 
-            Bitmap decodeBitmap = BitmapFactory.decodeByteArray(b,0,b.length);
-
-            rotateBitmap = rotate(decodeBitmap);
-
-            imageView.setImageBitmap(rotateBitmap);
-
+        try {
+            bitmap = BitmapFactory.decodeStream(getApplication().openFileInput("imageToSend"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            finish();
+            return;
         }
 
+        ImageView imageView = findViewById(R.id.imageCaptured);
+        imageView.setImageBitmap(bitmap);
+        Uid = FirebaseAuth.getInstance().getUid();
         Button mStory = findViewById(R.id.story);
         mStory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +68,7 @@ public class ShowCaptureActivity extends AppCompatActivity {
         StorageReference filePath = FirebaseStorage.getInstance().getReference().child("captures").child(key);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        rotateBitmap.compress(Bitmap.CompressFormat.JPEG, 20,baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20,baos);
 
         byte[] dataToUpload = baos.toByteArray();
         final UploadTask uploadTask = filePath.putBytes(dataToUpload);
@@ -107,14 +106,5 @@ public class ShowCaptureActivity extends AppCompatActivity {
 
 
 
-    private Bitmap rotate(Bitmap decodeBitmap) {
 
-        int width = decodeBitmap.getWidth();
-        int height = decodeBitmap.getHeight();
-
-        Matrix matrix= new Matrix();
-        matrix.setRotate(90);
-        return Bitmap.createBitmap(decodeBitmap,0,0,width,height,matrix,true);
-
-    }
 }
